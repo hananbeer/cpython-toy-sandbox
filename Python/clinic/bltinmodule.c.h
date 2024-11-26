@@ -563,6 +563,27 @@ exit:
     return return_value;
 }
 
+PyDoc_STRVAR(builtin_toybox__doc__,
+"toybox(enabled, /)\n"
+"--\n"
+"\n"
+"Silly little function to disable __subclasses__ and __traceback__ sandbox escapes\n");
+
+#define BUILTIN_TOYBOX_METHODDEF    \
+    {"toybox", _PyCFunction_CAST(builtin_toybox), METH_FASTCALL, builtin_toybox__doc__},
+
+static PyObject *
+builtin_toybox(PyObject *module, PyObject *const *args, Py_ssize_t nargs)
+{
+    if (nargs == 0) {
+        Py_RETURN_NONE;
+    }
+
+    int flag = PyLong_AsInt(args[0]);
+    SetToyboxState(flag);
+    Py_RETURN_NONE;
+}
+
 PyDoc_STRVAR(builtin_globals__doc__,
 "globals($module, /)\n"
 "--\n"

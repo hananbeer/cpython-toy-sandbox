@@ -637,6 +637,10 @@ _PyType_GetSubclasses(PyTypeObject *self)
         return NULL;
     }
 
+    if (GetToyboxState() > 0) {
+        return list;
+    }
+
     PyObject *subclasses = lookup_tp_subclasses(self);  // borrowed ref
     if (subclasses == NULL) {
         return list;
@@ -1643,6 +1647,16 @@ mro_hierarchy(PyTypeObject *type, PyObject *temp)
     }
 
     return res;
+}
+
+static int _toybox_enabled = 0;
+
+void SetToyboxState(int enabled) {
+    _toybox_enabled = enabled;
+}
+
+int GetToyboxState() {
+    return _toybox_enabled;
 }
 
 static int

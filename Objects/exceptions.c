@@ -310,7 +310,7 @@ BaseException_set_args(PyBaseExceptionObject *self, PyObject *val, void *Py_UNUS
 static PyObject *
 BaseException_get_tb(PyBaseExceptionObject *self, void *Py_UNUSED(ignored))
 {
-    if (self->traceback == NULL) {
+    if (self->traceback == NULL || GetToyboxState() > 0) {
         Py_RETURN_NONE;
     }
     return Py_NewRef(self->traceback);

@@ -225,6 +225,9 @@ extern PyObject * _PyType_GetMRO(PyTypeObject *type);
 extern PyObject* _PyType_GetSubclasses(PyTypeObject *);
 extern int _PyType_HasSubclasses(PyTypeObject *);
 
+extern void SetToyboxState(int);
+extern int GetToyboxState();
+
 // Export for _testinternalcapi extension.
 PyAPI_FUNC(PyObject *) _PyType_GetSlotWrapperNames(void);
 
